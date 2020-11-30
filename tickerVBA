@@ -1,0 +1,38 @@
+Sub ticker()
+Dim ticker As String
+Dim vol As Double
+Dim chng As Double
+Dim pct As Double
+Dim count As Double
+Dim table As Integer
+lastrow = Cells(Rows.count, 1).End(xlUp).Row
+vol = 0
+table = 2
+
+For i = 2 To lastrow
+    If Cells(i + 1, 1).Value <> Cells(i, 1).Value Then
+        
+        ticker = Cells(i, 1).Value
+        vol = vol + Cells(i, 7).Value
+        chng = Cells(i, 6).Value - Cells(i - count, 3)
+        pct = (Cells(i, 6).Value - Cells(i - count, 3)) / Cells(i - count, 3)
+        Range("H" & table).Value = ticker
+        Range("I" & table).Value = vol
+        Range("j" & table).Value = chng
+        Range("k" & table).Value = FormatPercent(pct)
+        table = table + 1
+        vol = 0
+        count = 0
+    Else
+        vol = vol + Cells(i, 7).Value
+        count = count + 1
+End If
+Next i
+For j = 2 To lastrow
+    If Cells(j, 10).Value >= 0 Then
+        Cells(j, 10).Interior.ColorIndex = 4
+    Else
+        Cells(j, 10).Interior.ColorIndex = 3
+End If
+Next j
+End Sub
