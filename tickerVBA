@@ -10,8 +10,8 @@ vol = 0
 table = 2
 
 For i = 2 To lastrow
-    If Cells(i + 1, 1).Value <> Cells(i, 1).Value Then
-        
+    If Cells(i + 1, 1).Value <> Cells(i, 1).Value And Cells(i - count, 3) <> 0 Then
+
         ticker = Cells(i, 1).Value
         vol = vol + Cells(i, 7).Value
         chng = Cells(i, 6).Value - Cells(i - count, 3)
